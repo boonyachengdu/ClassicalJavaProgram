@@ -1,2 +1,0 @@
-# ClassicalJavaProgram
-Classical Java Program.
