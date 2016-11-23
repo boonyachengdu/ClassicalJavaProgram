@@ -1,3 +1,3 @@
 # ClassicalJavaProgram
 ClassicalJavaProgram means Classical Java Program.
-Here are some skills,threads operation and self-defined annotations.
+Here are some programming skills,operating threads and self-defineded annotations.
