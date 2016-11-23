@@ -1,8 +1,7 @@
-package com.boonya.traps;
+package com.boonya.program.traps;
 
 import org.junit.Test;
-
-import com.boonya.program.skills.ReadAndWriteConcurrentHashMap;
+import com.boonya.program.traps.ReadAndWriteConcurrentHashMap;
 import com.boonya.program.traps.ReadAndWriteMap;
 
 public class ReadAndWriteMapTest {
@@ -41,7 +40,7 @@ public class ReadAndWriteMapTest {
 	}
 	
 	@Test
-	public void testSafeThreadMap(){
+	public void testBetterUnSafeThreadMap(){
 		final ReadAndWriteConcurrentHashMap cacheManage = new ReadAndWriteConcurrentHashMap();
 		Thread[] threads = new Thread[ReadAndWriteMapTest.clientCount];
 		for (int i = 0; i < ReadAndWriteMapTest.clientCount; i++) {
@@ -70,4 +69,5 @@ public class ReadAndWriteMapTest {
 			e.printStackTrace();
 		}
 	}
+	
 }
