@@ -2,8 +2,7 @@ package com.boonya.program.skills;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import com.boonya.annotation.UnSafeThread;
+import com.boonya.annotation.SafeThread;
 /**
  * 非线程安全的Map读写操作：同步块未覆盖到所有场景。
  * 
@@ -15,7 +14,7 @@ import com.boonya.annotation.UnSafeThread;
  * @comment   
  * @update
  */
-@UnSafeThread
+@SafeThread
 public class ReadAndWriteConcurrentHashMap {
 
 	// ConcurrentHashMaps虽然是线程安全的但是外部操作也需要同步读写才能保证一致性
