@@ -18,7 +18,7 @@ public class DelayedTask implements Runnable, Delayed {
 
     private static int counter = 0;
     
-    protected static List<DelayedTask> sequence = new ArrayList<>();
+    protected static List<DelayedTask> sequence = new ArrayList<DelayedTask>();
     
     private final int id = counter++;
     
