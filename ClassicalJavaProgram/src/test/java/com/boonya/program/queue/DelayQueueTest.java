@@ -181,7 +181,7 @@ public class DelayQueueTest {
 		}
 
 		try {
-			Thread.sleep(1000 * 2);
+			Thread.sleep(1000 * 10);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

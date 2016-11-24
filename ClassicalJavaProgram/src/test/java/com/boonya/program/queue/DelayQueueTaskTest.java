@@ -1,32 +1,28 @@
 package com.boonya.program.queue;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.DelayQueue;
-import java.util.concurrent.Delayed;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.Test;
 
 public class DelayQueueTaskTest {
 
 	@Test
 	public void test() {
-		int maxDelayTime = 5000;// milliseconds
+		// milliseconds
+		int maxDelayTime = 5000;
 		Random random = new Random(47);
 		ExecutorService exec = Executors.newCachedThreadPool();
-		DelayQueue<DelayedTask> queue = new DelayQueue<>();
+		DelayQueue<DelayedTask> queue = new DelayQueue<DelayedTask>();
 		// 填充10个休眠时间随机的任务
 		for (int i = 0; i < 10; i++) {
 			queue.put(new DelayedTask(random.nextInt(maxDelayTime)));
 		}
 		// 设置结束的时候。
-		queue.add(new DelayedTaskEndSentinel(maxDelayTime, exec));
+		queue.add(new DelayedTask.EndSentinel(maxDelayTime, exec));
 		exec.execute(new DelayedTaskConsumer(queue));
-		
+
 		// 保存主线程存活
 		try {
 			Thread.sleep(10000);
@@ -36,89 +32,4 @@ public class DelayQueueTaskTest {
 		}
 	}
 
-}
-
-class DelayedTask implements Runnable, Delayed {
-	
-	private final TimeUnit NANOSECONDS=TimeUnit.NANOSECONDS;
-	
-	private final TimeUnit MILLISECONDS=TimeUnit.MILLISECONDS;
-
-	private int counter = 0;
-	protected List<DelayedTask> sequence = new ArrayList<DelayedTask>();
-	private final int id = counter++;
-	private final int delayTime;
-	private final long triggerTime;
-
-	public DelayedTask(int delayInMillis) {
-		delayTime = delayInMillis;
-		triggerTime = System.nanoTime()
-				+ NANOSECONDS.convert(delayTime, MILLISECONDS);
-		sequence.add(this);
-	}
-
-	@Override
-	public int compareTo(Delayed o) {
-		DelayedTask that = (DelayedTask) o;
-		if (triggerTime < that.triggerTime)
-			return -1;
-		if (triggerTime > that.triggerTime)
-			return 1;
-		return 0;
-	}
-
-	/**
-	 * 剩余的延迟时间
-	 */
-	@Override
-	public long getDelay(TimeUnit unit) {
-		return unit.convert(triggerTime - System.nanoTime(), NANOSECONDS);
-	}
-
-	@Override
-	public void run() {
-		System.out.println(this + " ");
-	}
-
-	@Override
-	public String toString() {
-		return String.format("[%1$-4d]", delayTime) + " Task " + id;
-	}
-
-	
-}
-
-class DelayedTaskEndSentinel extends DelayedTask {
-	private ExecutorService exec;
-
-	public DelayedTaskEndSentinel(int delay, ExecutorService exec) {
-		super(delay);
-		this.exec = exec;
-	}
-
-	@Override
-	public void run() {
-		System.out.println(this + " calling shutDownNow()");
-		exec.shutdownNow();
-	}
-}
-
-class DelayedTaskConsumer implements Runnable {
-	private DelayQueue<DelayedTask> tasks;
-
-	public DelayedTaskConsumer(DelayQueue<DelayedTask> tasks) {
-		this.tasks = tasks;
-	}
-
-	@Override
-	public void run() {
-		try {
-			while (!Thread.interrupted()) {
-				tasks.take().run();// run tasks with current thread.
-			}
-		} catch (InterruptedException e) {
-			// TODO: handle exception
-		}
-		System.out.println("Finished DelaytedTaskConsumer.");
-	}
 }
