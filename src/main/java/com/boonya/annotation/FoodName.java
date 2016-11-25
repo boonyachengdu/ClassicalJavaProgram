@@ -30,6 +30,6 @@ import java.lang.annotation.Target;
 @Documented
 public @interface FoodName {
 	
-	public String value() default "";
+	public String value() default "Banana";
 
 }
