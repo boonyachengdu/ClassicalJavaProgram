@@ -50,5 +50,16 @@ public class BigDecimalTest {
 		System.out.println(BBigDecimal.multiply(a, b,2));// 2.2
 		System.out.println(BBigDecimal.divide(a, b,5));// 1.81818
 	}
+	
+	
+	@Test
+	public void testCommaNumber(){
+		String obj="883,903,656.219";
+		BigDecimal num=BBigDecimal.formatComma2BigDecimal(obj);
+		System.out.println("method=testCommaNumber>:"+num);// 输出883903656.22
+		
+		String result=BBigDecimal.formatCommaAnd2Point(num); 
+		System.out.println("method=testCommaNumber>:"+result);// 输出883,903,656.22
+	}
 
 }

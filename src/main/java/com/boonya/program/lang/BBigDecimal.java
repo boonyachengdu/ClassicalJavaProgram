@@ -2,18 +2,23 @@ package com.boonya.program.lang;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 /**
- * BigDecimal精确计算:参考http://docs.oracle.com/javase/7/docs/api/java/math/BigDecimal.html
+ * BigDecimal精确计算:参考http://docs.oracle.com/javase/7/docs/api/java/math/
+ * BigDecimal.html
  * 
  * <li>java的float只能用来进行科学计算或工程计算，在大多数的商业计算中，一般采用java.math.BigDecimal类来进行精确计算。</li>
+ * 
  * @package com.boonya.program.lang.BBigDecimal
- * @date   2016年11月28日  上午11:33:44
+ * @date 2016年11月28日 上午11:33:44
  * @author pengjunlin
- * @comment   
+ * @comment
  * @update
  */
-public class BBigDecimal extends BigDecimal{
-	
+public class BBigDecimal extends BigDecimal {
+
 	/**
 	 * 
 	 */
@@ -37,7 +42,7 @@ public class BBigDecimal extends BigDecimal{
 		BigDecimal b = new BigDecimal(Double.toString(value2));
 		return a.add(b).doubleValue();
 	}
-	
+
 	/**
 	 * 提供精确加法计算的add方法
 	 * 
@@ -48,17 +53,18 @@ public class BBigDecimal extends BigDecimal{
 	 * @param scale
 	 *            精确范围
 	 * @return 两个参数的和
-	 * @throws IllegalAccessException 
+	 * @throws IllegalAccessException
 	 */
-	public static double add(double value1, double value2,int scale) throws IllegalAccessException {
+	public static double add(double value1, double value2, int scale)
+			throws IllegalAccessException {
 		BigDecimal a = new BigDecimal(Double.toString(value1));
 		BigDecimal b = new BigDecimal(Double.toString(value2));
 		// 如果精确范围小于0，抛出异常信息
-		if(scale<0){
+		if (scale < 0) {
 			throw new IllegalAccessException("精确度不能小于0");
 		}
-		a=a.setScale(scale);//必须重新赋值
-		b=b.setScale(scale);//必须重新赋值
+		a = a.setScale(scale);// 必须重新赋值
+		b = b.setScale(scale);// 必须重新赋值
 		return a.add(b).setScale(scale).doubleValue();
 	}
 
@@ -76,7 +82,7 @@ public class BBigDecimal extends BigDecimal{
 		BigDecimal b = new BigDecimal(Double.toString(value2));
 		return a.subtract(b).doubleValue();
 	}
-	
+
 	/**
 	 * 提供精确减法运算的subtract方法
 	 * 
@@ -87,17 +93,18 @@ public class BBigDecimal extends BigDecimal{
 	 * @param scale
 	 *            精确范围
 	 * @return 两个参数的差
-	 * @throws IllegalAccessException 
+	 * @throws IllegalAccessException
 	 */
-	public static double subtract(double value1, double value2,int scale) throws IllegalAccessException {
+	public static double subtract(double value1, double value2, int scale)
+			throws IllegalAccessException {
 		BigDecimal a = new BigDecimal(Double.toString(value1));
 		BigDecimal b = new BigDecimal(Double.toString(value2));
 		// 如果精确范围小于0，抛出异常信息
-		if(scale<0){
+		if (scale < 0) {
 			throw new IllegalAccessException("精确度不能小于0");
 		}
-		a=a.setScale(scale);//必须重新赋值
-		b=b.setScale(scale);//必须重新赋值
+		a = a.setScale(scale);// 必须重新赋值
+		b = b.setScale(scale);// 必须重新赋值
 		return a.subtract(b).setScale(scale).doubleValue();
 	}
 
@@ -115,7 +122,7 @@ public class BBigDecimal extends BigDecimal{
 		BigDecimal b = new BigDecimal(Double.toString(value2));
 		return a.multiply(b).doubleValue();
 	}
-	
+
 	/**
 	 * 提供精确乘法运算的multiply方法
 	 * 
@@ -125,21 +132,22 @@ public class BBigDecimal extends BigDecimal{
 	 *            乘数
 	 * @param scale
 	 *            精确范围
-	 * @return 两个参数的积 
-	 * @throws IllegalAccessException 
+	 * @return 两个参数的积
+	 * @throws IllegalAccessException
 	 */
-	public static double multiply(double value1, double value2,int scale) throws IllegalAccessException {
+	public static double multiply(double value1, double value2, int scale)
+			throws IllegalAccessException {
 		BigDecimal a = new BigDecimal(Double.toString(value1));
 		BigDecimal b = new BigDecimal(Double.toString(value2));
 		// 如果精确范围小于0，抛出异常信息
-		if(scale<0){
+		if (scale < 0) {
 			throw new IllegalAccessException("精确度不能小于0");
 		}
-		a=a.setScale(scale);//必须重新赋值
-		b=b.setScale(scale);//必须重新赋值
+		a = a.setScale(scale);// 必须重新赋值
+		b = b.setScale(scale);// 必须重新赋值
 		return a.multiply(b).setScale(scale).doubleValue();
 	}
-	
+
 	/**
 	 * 提供精确的除法运算方法divide
 	 * 
@@ -160,10 +168,76 @@ public class BBigDecimal extends BigDecimal{
 		if (scale < 0) {
 			throw new IllegalAccessException("精确度不能小于0");
 		}
-		a=a.setScale(scale);//必须重新赋值
-		b=b.setScale(scale);//必须重新赋值
-		return a.divide(b,scale).doubleValue();
+		a = a.setScale(scale);// 必须重新赋值
+		b = b.setScale(scale);// 必须重新赋值
+		return a.divide(b, scale).doubleValue();
 	}
 
+	/**
+	 * 格式化对象为BigDecimal：将美圆","替换为空字符数据
+	 * 
+	 * @param obj
+	 * @return 两个参数的商
+	 * @throws IllegalAccessException
+	 */
+	public static BigDecimal formatComma2BigDecimal(Object obj) {
+		String val = String.valueOf(obj);
+		if (val == null)
+			return new BigDecimal("0.00");
+
+		val = val.replaceAll(",", "");
+		if (!isNumber(val))
+			return new BigDecimal("0.00");
+
+		BigDecimal decimal = new BigDecimal(val);
+		decimal = decimal.setScale(2, RoundingMode.HALF_UP);
+
+		return decimal;
+
+	}
+
+	/**
+	 * 格式化对象为BigDecimal：格式化为两位小数
+	 * 
+	 * @param obj
+	 * @return 两个参数的商
+	 * @throws IllegalAccessException
+	 */
+	public static String formatCommaAnd2Point(Object obj) {
+		BigDecimal decimal = formatComma2BigDecimal(obj);
+
+		DecimalFormat df = new DecimalFormat("#,###.00");
+		String decimalStr = df.format(decimal).equals(".00") ? "0.00" : df
+				.format(decimal);
+		if (decimalStr.startsWith(".")) {
+			decimalStr = "0" + decimalStr;
+		}
+		return decimalStr;
+	}
+
+	
+	private static boolean isDouble(String value) {
+		try {
+			Double.parseDouble(value);
+			if (value.contains("."))
+				return true;
+			return false;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+	private static boolean isInteger(String value) {
+		try {
+			Integer.parseInt(value);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+	private static boolean isNumber(String value) {
+		return isInteger(value) || isDouble(value);
+	}
 
 }
