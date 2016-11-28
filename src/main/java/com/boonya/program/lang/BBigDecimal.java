@@ -33,8 +33,8 @@ public class BBigDecimal extends BigDecimal{
 	 * @return 两个参数的和
 	 */
 	public static double add(double value1, double value2) {
-		BigDecimal a = new BigDecimal(value1+"");
-		BigDecimal b = new BigDecimal(value2+"");
+		BigDecimal a = new BigDecimal(Double.toString(value1));
+		BigDecimal b = new BigDecimal(Double.toString(value2));
 		return a.add(b).doubleValue();
 	}
 	
@@ -51,8 +51,8 @@ public class BBigDecimal extends BigDecimal{
 	 * @throws IllegalAccessException 
 	 */
 	public static double add(double value1, double value2,int scale) throws IllegalAccessException {
-		BigDecimal a = new BigDecimal(value1+"");
-		BigDecimal b = new BigDecimal(value2+"");
+		BigDecimal a = new BigDecimal(Double.toString(value1));
+		BigDecimal b = new BigDecimal(Double.toString(value2));
 		// 如果精确范围小于0，抛出异常信息
 		if(scale<0){
 			throw new IllegalAccessException("精确度不能小于0");
@@ -72,8 +72,8 @@ public class BBigDecimal extends BigDecimal{
 	 * @return 两个参数的差
 	 */
 	public static double subtract(double value1, double value2) {
-		BigDecimal a = new BigDecimal(value1+"");
-		BigDecimal b = new BigDecimal(value2+"");
+		BigDecimal a = new BigDecimal(Double.toString(value1));
+		BigDecimal b = new BigDecimal(Double.toString(value2));
 		return a.subtract(b).doubleValue();
 	}
 	
@@ -90,8 +90,8 @@ public class BBigDecimal extends BigDecimal{
 	 * @throws IllegalAccessException 
 	 */
 	public static double subtract(double value1, double value2,int scale) throws IllegalAccessException {
-		BigDecimal a = new BigDecimal(value1+"");
-		BigDecimal b = new BigDecimal(value2+"");
+		BigDecimal a = new BigDecimal(Double.toString(value1));
+		BigDecimal b = new BigDecimal(Double.toString(value2));
 		// 如果精确范围小于0，抛出异常信息
 		if(scale<0){
 			throw new IllegalAccessException("精确度不能小于0");
@@ -111,8 +111,8 @@ public class BBigDecimal extends BigDecimal{
 	 * @return 两个参数的积
 	 */
 	public static double multiply(double value1, double value2) {
-		BigDecimal a = new BigDecimal(value1+"");
-		BigDecimal b = new BigDecimal(value2+"");
+		BigDecimal a = new BigDecimal(Double.toString(value1));
+		BigDecimal b = new BigDecimal(Double.toString(value2));
 		return a.multiply(b).doubleValue();
 	}
 	
@@ -129,8 +129,8 @@ public class BBigDecimal extends BigDecimal{
 	 * @throws IllegalAccessException 
 	 */
 	public static double multiply(double value1, double value2,int scale) throws IllegalAccessException {
-		BigDecimal a = new BigDecimal(value1+"");
-		BigDecimal b = new BigDecimal(value2+"");
+		BigDecimal a = new BigDecimal(Double.toString(value1));
+		BigDecimal b = new BigDecimal(Double.toString(value2));
 		// 如果精确范围小于0，抛出异常信息
 		if(scale<0){
 			throw new IllegalAccessException("精确度不能小于0");
@@ -154,8 +154,8 @@ public class BBigDecimal extends BigDecimal{
 	 */
 	public static double divide(double value1, double value2, int scale)
 			throws IllegalAccessException {
-		BigDecimal a = new BigDecimal(value1+"");
-		BigDecimal b = new BigDecimal(value2+"");
+		BigDecimal a = new BigDecimal(Double.toString(value1));
+		BigDecimal b = new BigDecimal(Double.toString(value2));
 		// 如果精确范围小于0，抛出异常信息
 		if (scale < 0) {
 			throw new IllegalAccessException("精确度不能小于0");
