@@ -2,7 +2,16 @@ package com.boonya.program.lang;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
+/**
+ * BigDecimal精确计算:参考http://docs.oracle.com/javase/7/docs/api/java/math/BigDecimal.html
+ * 
+ * <li>java的float只能用来进行科学计算或工程计算，在大多数的商业计算中，一般采用java.math.BigDecimal类来进行精确计算。</li>
+ * @package com.boonya.program.lang.BBigDecimal
+ * @date   2016年11月28日  上午11:33:44
+ * @author pengjunlin
+ * @comment   
+ * @update
+ */
 public class BBigDecimal extends BigDecimal{
 	
 	/**
@@ -48,8 +57,8 @@ public class BBigDecimal extends BigDecimal{
 		if(scale<0){
 			throw new IllegalAccessException("精确度不能小于0");
 		}
-		a=a.setScale(scale);
-		b=b.setScale(scale);
+		a=a.setScale(scale);//必须重新赋值
+		b=b.setScale(scale);//必须重新赋值
 		return a.add(b).setScale(scale).doubleValue();
 	}
 
@@ -87,8 +96,8 @@ public class BBigDecimal extends BigDecimal{
 		if(scale<0){
 			throw new IllegalAccessException("精确度不能小于0");
 		}
-		a=a.setScale(scale);
-		b=b.setScale(scale);
+		a=a.setScale(scale);//必须重新赋值
+		b=b.setScale(scale);//必须重新赋值
 		return a.subtract(b).setScale(scale).doubleValue();
 	}
 
@@ -126,8 +135,8 @@ public class BBigDecimal extends BigDecimal{
 		if(scale<0){
 			throw new IllegalAccessException("精确度不能小于0");
 		}
-		a=a.setScale(scale);
-		b=b.setScale(scale);
+		a=a.setScale(scale);//必须重新赋值
+		b=b.setScale(scale);//必须重新赋值
 		return a.multiply(b).setScale(scale).doubleValue();
 	}
 	
@@ -145,18 +154,15 @@ public class BBigDecimal extends BigDecimal{
 	 */
 	public static double divide(double value1, double value2, int scale)
 			throws IllegalAccessException {
+		BigDecimal a = new BigDecimal(value1+"");
+		BigDecimal b = new BigDecimal(value2+"");
 		// 如果精确范围小于0，抛出异常信息
 		if (scale < 0) {
 			throw new IllegalAccessException("精确度不能小于0");
 		}
-		BigDecimal a = new BigDecimal(value1+"");
-		a=a.setScale(scale);
-		
-		BigDecimal b = new BigDecimal(value2+"");
-		b=b.setScale(scale);
-		
-		BigDecimal c1=a.divide(b,scale);
-		return c1.doubleValue();
+		a=a.setScale(scale);//必须重新赋值
+		b=b.setScale(scale);//必须重新赋值
+		return a.divide(b,scale).doubleValue();
 	}
 
 
