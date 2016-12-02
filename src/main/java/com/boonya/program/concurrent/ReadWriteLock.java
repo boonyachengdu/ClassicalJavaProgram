@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
+ * ReentrantReadWriteLock可重入读写锁
  * 
- * 写锁只允许一个线程进行数据修改操作，读锁允许多个线程共同读取资源
- * 
+ * <li>写锁只允许一个线程进行数据修改操作，读锁允许多个线程共同读取资源</li>
  * @package com.boonya.program.sync.ReadWriteLock
  * @date   2016年12月2日  下午3:37:44
  * @author pengjunlin
