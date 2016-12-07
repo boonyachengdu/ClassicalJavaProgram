@@ -2,7 +2,7 @@ package just.test.trap;
 
 import org.junit.Test;
 
-public class NumberTraps {
+public class NumberTrap {
 
 	/**
 	 * 对于精确答案的地方，要尽量避免使用float和double；对于货币计算，要使用int,long和BigDecimal，并且使用
@@ -47,19 +47,31 @@ public class NumberTraps {
 		System.out.println((int) (char) (byte) -1);// 65535
 	}
 
+	
 	/**
-	 * 使用条件操作符最好是使用类型相同的第二和第三操作数
+	 * 类型溢出错误
 	 * 
-	 * @MethodName: judge
-	 * @Description:
+	 * @MethodName: maxInteger 
+	 * @Description: 
 	 * @throws
 	 */
 	@Test
-	public void judge() {
-		char x = 'X';
-		int i = 0;
-		System.out.println(true ? x : 0);//X
-		System.out.println(false ? i : x);//88
+	public void maxInteger(){
+		long x=Integer.MAX_VALUE+1;
+		System.out.println(x);//-2147483648
+	}
+	
+	/**
+	 * 类型溢出错误
+	 * 
+	 * @MethodName: maxLong 
+	 * @Description: 
+	 * @throws
+	 */
+	@Test
+	public void maxLong(){
+		Number i=Long.MAX_VALUE;
+		System.out.println(i.intValue()>0);//false
 	}
 
 }
