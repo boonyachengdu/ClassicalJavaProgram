@@ -73,5 +73,18 @@ public class NumberTrap {
 		Number i=Long.MAX_VALUE;
 		System.out.println(i.intValue()>0);//false
 	}
+	
+	/**
+	 * round取值问题
+	 * 
+	 * @MethodName: round 
+	 * @Description: 
+	 * @throws
+	 */
+	@Test
+	public void round(){
+		System.out.println(Math.round(11.5));//返回（long）12，
+		System.out.println(Math.round(-11.5));//返回（long）-11;
+	}
 
 }
