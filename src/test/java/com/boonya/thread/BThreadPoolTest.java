@@ -40,6 +40,8 @@ public class BThreadPoolTest {
 		executorService.execute(new Task());
 		
 		executorService.execute(new Task());
+		
+		executorService.shutdown();
 	}
 	
 	/**
@@ -63,6 +65,8 @@ public class BThreadPoolTest {
 		executorService.execute(new Task());
 		
 		executorService.execute(new Task());
+		
+		executorService.shutdown();
 	}
 	
 	/**
@@ -86,6 +90,8 @@ public class BThreadPoolTest {
 		executorService.execute(new Task());
 		
 		executorService.execute(new Task());
+		
+		executorService.shutdown();
 	}
 	
 	/**
@@ -111,6 +117,8 @@ public class BThreadPoolTest {
 		executorService.execute(new Task());
 		
 		executorService.execute(new Task());
+		
+		executorService.shutdown();
 	}
 	
 	/**
@@ -139,6 +147,8 @@ public class BThreadPoolTest {
 		executorService.execute(new Task());
 		
 		executorService.execute(new Task());
+		
+		executorService.shutdown();
 	}
 	
 
